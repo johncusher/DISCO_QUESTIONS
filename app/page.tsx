@@ -231,6 +231,7 @@ export default function Home() {
               <button
                 onClick={handleGenerate}
                 disabled={loading || !product || !company}
+                style={{ backgroundColor: '#dc2626' }}
                 className="mx-auto mt-6 flex h-16 w-full max-w-[420px] items-center justify-center rounded-2xl bg-red-600 px-6 text-xl font-semibold text-white shadow-xl shadow-red-600/20 transition hover:bg-red-700 focus:outline-none focus:ring-4 focus:ring-red-200 disabled:cursor-not-allowed disabled:bg-red-600 disabled:text-white disabled:opacity-90"
               >
                 {loading ? 'Generating questions...' : 'Generate Questions'}
