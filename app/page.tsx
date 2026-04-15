@@ -5,7 +5,6 @@ import { useState } from 'react'
 export default function Home() {
   const [product, setProduct] = useState('')
   const [company, setCompany] = useState('')
-  const [industry, setIndustry] = useState('')
   const [questions, setQuestions] = useState<string[]>([])
   const [loading, setLoading] = useState(false)
 
@@ -57,13 +56,7 @@ export default function Home() {
     'Ivanti Velocity Voice'
   ]
 
-  const industries = [
-    'Healthcare',
-    'Finance',
-    'Education',
-    'Retail',
-    'Manufacturing'
-  ]
+
 
   const getCategory = (prod: string): string => {
     if (prod.includes('Patch') || prod.includes('Vulnerability') || prod.includes('Security Posture') || prod.includes('EASM') || prod.includes('Secure Connectivity')) return 'Exposure Management'
@@ -185,117 +178,78 @@ export default function Home() {
   const handleGenerate = async () => {
     if (product && company) {
       setLoading(true)
-      setQuestions(generateQuestions(product, company, industry))
+      setQuestions(generateQuestions(product, company, 'General'))
       setLoading(false)
     }
   }
 
   return (
-    <div className="min-h-screen bg-slate-950 px-4 py-8 sm:px-6 lg:px-8">
+    <div className="min-h-screen bg-slate-50 px-4 py-12 sm:px-6 lg:px-8">
       <div className="mx-auto max-w-3xl">
-        <div className="overflow-hidden rounded-[32px] border border-white/10 bg-slate-900/95 shadow-2xl shadow-slate-950/30 ring-1 ring-white/5">
-          <div className="bg-gradient-to-r from-fuchsia-600 via-rose-500 to-amber-400 px-6 py-8 sm:px-8">
-            <div className="text-center">
-              <p className="text-sm uppercase tracking-[0.3em] text-white/75">Ivanti Challenger</p>
-              <h1 className="mt-3 text-4xl font-black tracking-tight text-white">Discovery Questions</h1>
-              <p className="mx-auto mt-3 max-w-2xl text-base leading-6 text-white/80">
-                Generate sharper discovery questions for Ivanti products and customer conversations.
-              </p>
-            </div>
-          </div>
+        <header className="mb-10 text-center">
+          <p className="text-sm uppercase tracking-[0.25em] text-slate-500">Ivanti Challenger</p>
+          <h1 className="mt-4 text-4xl font-black tracking-tight text-slate-950 sm:text-5xl">
+            Discovery Questions
+          </h1>
+          <p className="mx-auto mt-4 max-w-2xl text-base leading-7 text-slate-600 sm:text-lg">
+            Generate tailored discovery questions quickly for any Ivanti product and customer.
+          </p>
+        </header>
 
-          <div className="px-6 py-8 sm:px-8 sm:py-10">
-            <div className="space-y-8">
-              <div className="rounded-[28px] border border-white/10 bg-slate-950/90 p-6 shadow-xl shadow-slate-950/20">
-                <div className="mb-6">
-                  <p className="text-sm font-semibold uppercase tracking-[0.22em] text-rose-300">Quick Capture</p>
-                  <h2 className="mt-2 text-xl font-bold text-white">Customer details</h2>
-                </div>
+        <div className="rounded-[28px] border border-slate-200 bg-white px-6 py-8 shadow-sm sm:px-10 sm:py-10">
+          <div className="space-y-8">
+            <div className="space-y-6">
+              <div>
+                <label htmlFor="product" className="block text-sm font-semibold text-slate-800">Ivanti Product</label>
+                <select
+                  id="product"
+                  value={product}
+                  onChange={(e) => setProduct(e.target.value)}
+                  className="mt-3 w-full rounded-lg border border-slate-300 bg-white px-4 py-3 text-base text-slate-900 shadow-sm outline-none transition focus:border-black focus:ring-2 focus:ring-slate-200"
+                >
+                  <option value="">Select a product</option>
+                  {products.map((p) => (
+                    <option key={p} value={p}>{p}</option>
+                  ))}
+                </select>
+              </div>
 
-                <div className="space-y-5">
-                  <div>
-                    <label htmlFor="product" className="block text-sm font-semibold text-slate-200">Ivanti Product</label>
-                    <select
-                      id="product"
-                      value={product}
-                      onChange={(e) => setProduct(e.target.value)}
-                      className="mt-2 w-full rounded-2xl border border-slate-700 bg-slate-950 px-3 py-2 text-base text-white shadow-sm outline-none transition focus:border-white/40 focus:ring-2 focus:ring-rose-400/40"
-                    >
-                      <option value="" className="text-slate-500">Select a product</option>
-                      {products.map((p) => (
-                        <option key={p} value={p}>{p}</option>
-                      ))}
-                    </select>
-                  </div>
-
-                  <div>
-                    <label htmlFor="company" className="block text-sm font-semibold text-slate-200">Company Name</label>
-                    <input
-                      type="text"
-                      id="company"
-                      value={company}
-                      onChange={(e) => setCompany(e.target.value)}
-                      placeholder="Enter company name"
-                      className="mt-2 w-full rounded-2xl border border-slate-700 bg-slate-950 px-3 py-2 text-base text-white shadow-sm outline-none transition focus:border-white/40 focus:ring-2 focus:ring-rose-400/40"
-                    />
-                  </div>
-
-                  <div>
-                    <label htmlFor="industry" className="block text-sm font-semibold text-slate-200">Industry (optional)</label>
-                    <select
-                      id="industry"
-                      value={industry}
-                      onChange={(e) => setIndustry(e.target.value)}
-                      className="mt-2 w-full rounded-2xl border border-slate-700 bg-slate-950 px-3 py-2 text-base text-white shadow-sm outline-none transition focus:border-white/40 focus:ring-2 focus:ring-rose-400/40"
-                    >
-                      <option value="" className="text-slate-500">Add an optional industry</option>
-                      {industries.map((item) => (
-                        <option key={item} value={item}>{item}</option>
-                      ))}
-                    </select>
-                  </div>
-                </div>
+              <div>
+                <label htmlFor="company" className="block text-sm font-semibold text-slate-800">Company Name</label>
+                <input
+                  type="text"
+                  id="company"
+                  value={company}
+                  onChange={(e) => setCompany(e.target.value)}
+                  placeholder="Enter company name"
+                  className="mt-3 w-full rounded-lg border border-slate-300 bg-white px-4 py-3 text-base text-slate-900 shadow-sm outline-none transition focus:border-black focus:ring-2 focus:ring-slate-200"
+                />
               </div>
 
               <button
-                type="button"
                 onClick={handleGenerate}
                 disabled={loading || !product || !company}
-                className="w-full rounded-[28px] bg-gradient-to-r from-red-600 to-rose-600 px-6 py-5 text-lg font-bold text-white shadow-xl shadow-red-600/30 transition hover:from-red-700 hover:to-rose-700 focus:outline-none focus:ring-4 focus:ring-red-500/30 disabled:cursor-not-allowed disabled:from-slate-700 disabled:to-slate-700 disabled:text-slate-400 disabled:shadow-none"
+                className="mt-3 flex h-16 w-full items-center justify-center rounded-lg bg-red-600 px-5 text-lg font-semibold text-white transition hover:bg-red-700 focus:outline-none focus:ring-4 focus:ring-red-200 disabled:cursor-not-allowed disabled:bg-slate-300 disabled:text-slate-500"
               >
                 {loading ? 'Generating questions...' : 'Generate Questions'}
               </button>
-
-              <div className="rounded-[28px] border border-white/10 bg-slate-950/90 p-6 text-slate-300 shadow-xl shadow-slate-950/20">
-                <div className="grid gap-4 sm:grid-cols-2">
-                  <div>
-                    <p className="text-sm font-semibold uppercase tracking-[0.22em] text-slate-400">Selected Product</p>
-                    <p className="mt-2 text-base text-white">{product || 'None selected'}</p>
-                  </div>
-                  <div>
-                    <p className="text-sm font-semibold uppercase tracking-[0.22em] text-slate-400">Company</p>
-                    <p className="mt-2 text-base text-white">{company || 'Not entered'}</p>
-                  </div>
-                </div>
-              </div>
-
-              {questions.length > 0 && (
-                <div className="rounded-[28px] border border-white/10 bg-slate-950/90 p-6 shadow-xl shadow-slate-950/20">
-                  <div className="mb-6">
-                    <p className="text-sm font-semibold uppercase tracking-[0.22em] text-emerald-300">Generated Results</p>
-                    <h3 className="mt-2 text-xl font-bold text-white">Questions for {company}</h3>
-                  </div>
-
-                  <ol className="space-y-3">
-                    {questions.map((q, i) => (
-                      <li key={i} className="rounded-2xl border border-white/10 bg-slate-900/80 px-4 py-3 text-sm leading-6 text-slate-200 shadow-sm shadow-slate-950/15">
-                        {q}
-                      </li>
-                    ))}
-                  </ol>
-                </div>
-              )}
             </div>
+
+            {questions.length > 0 && (
+              <section className="rounded-3xl border border-red-200 bg-red-50 p-6">
+                <div className="mb-6">
+                  <h2 className="text-xl font-semibold text-slate-950">Generated Questions for {company}</h2>
+                  <p className="mt-2 text-sm leading-6 text-slate-600">Use these prompts for stronger discovery conversations.</p>
+                </div>
+                <ol className="space-y-4 pl-5 text-slate-700">
+                  {questions.map((q, i) => (
+                    <li key={i} className="rounded-2xl border border-red-300 bg-white px-4 py-4 text-base leading-7">
+                      {q}
+                    </li>
+                  ))}
+                </ol>
+              </section>
+            )}
           </div>
         </div>
       </div>
