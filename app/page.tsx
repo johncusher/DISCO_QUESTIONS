@@ -182,86 +182,84 @@ export default function Home() {
   }
 
   return (
-    <div className="min-h-screen bg-slate-950/5 py-12 px-4 sm:px-6 lg:px-8">
-      <div className="mx-auto max-w-3xl overflow-hidden rounded-[32px] border border-slate-200/70 bg-white/95 shadow-2xl shadow-slate-900/10 backdrop-blur transition-all duration-300">
-        <div className="bg-gradient-to-r from-rose-600 via-rose-500 to-red-500 px-8 py-10 text-center text-white sm:px-12">
-          <p className="text-sm uppercase tracking-[0.28em] text-rose-100 opacity-90">Ivanti Challenger</p>
-          <h1 className="mt-4 text-4xl font-black tracking-tight sm:text-5xl">Discovery Questions</h1>
-          <p className="mx-auto mt-4 max-w-2xl text-sm leading-6 text-rose-100/90 sm:text-base">
-            Generate tailored sales discovery questions for any Ivanti product and customer, with one click.
+    <div className="min-h-screen bg-slate-50 px-4 py-12 sm:px-6 lg:px-8">
+      <div className="mx-auto max-w-3xl">
+        <header className="mb-10 text-center">
+          <p className="text-sm uppercase tracking-[0.25em] text-slate-500">Ivanti Challenger</p>
+          <h1 className="mt-4 text-4xl font-black tracking-tight text-slate-950 sm:text-5xl">
+            Discovery Questions
+          </h1>
+          <p className="mx-auto mt-4 max-w-2xl text-base leading-7 text-slate-600 sm:text-lg">
+            Generate tailored discovery questions quickly for any Ivanti product and customer.
           </p>
-        </div>
+        </header>
 
-        <div className="px-6 pb-10 pt-8 sm:px-10">
-          <div className="grid gap-6">
-            <div className="rounded-3xl border border-slate-200 bg-slate-50 p-6 shadow-sm">
-              <div className="space-y-5">
-                <div>
-                  <label htmlFor="product" className="block text-sm font-semibold text-slate-900">Ivanti Product</label>
-                  <select
-                    id="product"
-                    value={product}
-                    onChange={(e) => setProduct(e.target.value)}
-                    className="mt-2 w-full rounded-3xl border border-slate-300 bg-white px-4 py-3 text-base text-slate-900 shadow-sm outline-none transition focus:border-rose-500 focus:ring-4 focus:ring-rose-100"
-                  >
-                    <option value="">Select a product</option>
-                    {products.map((p) => (
-                      <option key={p} value={p}>{p}</option>
-                    ))}
-                  </select>
-                </div>
-
-                <div>
-                  <label htmlFor="company" className="block text-sm font-semibold text-slate-900">Company Name</label>
-                  <input
-                    type="text"
-                    id="company"
-                    value={company}
-                    onChange={(e) => setCompany(e.target.value)}
-                    placeholder="Enter company name"
-                    className="mt-2 w-full rounded-3xl border border-slate-300 bg-white px-4 py-3 text-base text-slate-900 shadow-sm outline-none transition focus:border-rose-500 focus:ring-4 focus:ring-rose-100"
-                  />
-                </div>
-
-                <button
-                  onClick={handleGenerate}
-                  disabled={loading || !product || !company}
-                  className="mt-2 inline-flex w-full items-center justify-center rounded-3xl bg-rose-600 px-5 py-3 text-base font-semibold text-white transition hover:bg-rose-700 focus:outline-none focus:ring-4 focus:ring-rose-200 disabled:cursor-not-allowed disabled:bg-slate-300 disabled:text-slate-500"
+        <div className="rounded-[28px] border border-slate-200 bg-white px-6 py-8 shadow-sm sm:px-10 sm:py-10">
+          <div className="space-y-8">
+            <div className="space-y-6">
+              <div>
+                <label htmlFor="product" className="block text-sm font-semibold text-slate-800">Ivanti Product</label>
+                <select
+                  id="product"
+                  value={product}
+                  onChange={(e) => setProduct(e.target.value)}
+                  className="mt-3 w-full rounded-lg border border-slate-300 bg-white px-4 py-3 text-base text-slate-900 shadow-sm outline-none transition focus:border-black focus:ring-2 focus:ring-slate-200"
                 >
-                  {loading ? 'Generating questions...' : 'Generate Questions'}
-                </button>
+                  <option value="">Select a product</option>
+                  {products.map((p) => (
+                    <option key={p} value={p}>{p}</option>
+                  ))}
+                </select>
               </div>
+
+              <div>
+                <label htmlFor="company" className="block text-sm font-semibold text-slate-800">Company Name</label>
+                <input
+                  type="text"
+                  id="company"
+                  value={company}
+                  onChange={(e) => setCompany(e.target.value)}
+                  placeholder="Enter company name"
+                  className="mt-3 w-full rounded-lg border border-slate-300 bg-white px-4 py-3 text-base text-slate-900 shadow-sm outline-none transition focus:border-black focus:ring-2 focus:ring-slate-200"
+                />
+              </div>
+
+              <button
+                onClick={handleGenerate}
+                disabled={loading || !product || !company}
+                className="mt-3 flex h-16 w-full items-center justify-center rounded-lg bg-rose-600 px-5 text-lg font-semibold text-white transition hover:bg-rose-700 focus:outline-none focus:ring-4 focus:ring-rose-200 disabled:cursor-not-allowed disabled:bg-slate-300 disabled:text-slate-500"
+              >
+                {loading ? 'Generating questions...' : 'Generate Questions'}
+              </button>
             </div>
 
-            <div className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm">
-              <div className="flex flex-wrap items-center justify-between gap-4">
+            <div className="rounded-3xl border border-slate-200 bg-slate-50 p-6">
+              <div className="grid gap-4 sm:grid-cols-2">
                 <div>
-                  <p className="text-sm font-semibold text-slate-500">Selected product</p>
-                  <p className="mt-1 text-base text-slate-900">{product || 'None selected'}</p>
+                  <p className="text-sm font-semibold text-slate-500">Selected Product</p>
+                  <p className="mt-2 text-base text-slate-900">{product || 'None selected'}</p>
                 </div>
                 <div>
                   <p className="text-sm font-semibold text-slate-500">Company</p>
-                  <p className="mt-1 text-base text-slate-900">{company || 'Not entered'}</p>
+                  <p className="mt-2 text-base text-slate-900">{company || 'Not entered'}</p>
                 </div>
               </div>
             </div>
 
             {questions.length > 0 && (
-              <div className="rounded-[28px] border border-slate-200 bg-slate-950/5 p-6 shadow-sm">
-                <div className="mb-6 flex items-center justify-between gap-4">
-                  <div>
-                    <h2 className="text-xl font-semibold text-slate-900">Generated Questions for {company}</h2>
-                    <p className="mt-2 text-sm text-slate-600">Copy these discussion prompts for your next discovery call.</p>
-                  </div>
+              <section className="rounded-3xl border border-slate-200 bg-white p-6">
+                <div className="mb-6">
+                  <h2 className="text-xl font-semibold text-slate-950">Generated Questions for {company}</h2>
+                  <p className="mt-2 text-sm leading-6 text-slate-600">Use these prompts for stronger discovery conversations.</p>
                 </div>
-                <ul className="space-y-4">
+                <ol className="space-y-4 pl-5 text-slate-700">
                   {questions.map((q, i) => (
-                    <li key={i} className="rounded-3xl border border-slate-200 bg-white px-5 py-4 text-sm leading-6 text-slate-700 shadow-sm">
-                      <span className="mr-2 font-semibold text-rose-600">{i + 1}.</span>{q}
+                    <li key={i} className="rounded-2xl border border-slate-200 bg-slate-50 px-4 py-4 text-base leading-7">
+                      {q}
                     </li>
                   ))}
-                </ul>
-              </div>
+                </ol>
+              </section>
             )}
           </div>
         </div>
