@@ -184,9 +184,9 @@ export default function Home() {
   }
 
   return (
-    <div className="min-h-screen bg-slate-50 px-4 py-14 sm:px-6 lg:px-8 flex items-start justify-center">
+    <div className="min-h-screen bg-slate-50 px-4 py-16 sm:px-6 lg:px-8 flex items-start justify-center">
       <div className="w-full max-w-[600px]">
-        <header className="mb-10 text-center">
+        <header className="mb-12 text-center px-4 sm:px-6">
           <p className="text-sm uppercase tracking-[0.3em] text-slate-500">Ivanti Challenger</p>
           <h1 className="mt-4 text-5xl font-black tracking-tight text-slate-950">
             Discovery Questions
@@ -196,17 +196,17 @@ export default function Home() {
           </p>
         </header>
 
-        <div className="mx-auto rounded-[32px] border border-slate-200 bg-white shadow-lg shadow-slate-200/30">
-          <div className="h-[400px] w-full px-6 py-8 sm:px-8">
+        <div className="mx-auto w-[600px] rounded-[32px] border border-slate-200 bg-white px-10 py-10 shadow-lg shadow-slate-200/30">
+          <div className="h-[400px] w-full">
             <div className="flex h-full flex-col justify-between">
-              <div className="space-y-8">
+              <div className="space-y-10">
                 <div>
                   <label htmlFor="product" className="block text-sm font-semibold text-slate-800">Ivanti Product</label>
                   <select
                     id="product"
                     value={product}
                     onChange={(e) => setProduct(e.target.value)}
-                    className="mt-3 w-full rounded-2xl border border-slate-300 bg-white px-4 py-4 text-lg text-slate-900 shadow-sm outline-none transition focus:border-black focus:ring-2 focus:ring-slate-200"
+                    className="mt-3 w-full rounded-2xl border border-slate-300 bg-white px-6 py-4 text-lg text-slate-900 shadow-sm outline-none transition focus:border-black focus:ring-2 focus:ring-slate-200"
                   >
                     <option value="">Select a product</option>
                     {products.map((p) => (
@@ -223,7 +223,7 @@ export default function Home() {
                     value={company}
                     onChange={(e) => setCompany(e.target.value)}
                     placeholder="Enter company name"
-                    className="mt-3 w-full rounded-2xl border border-slate-300 bg-white px-4 py-4 text-lg text-slate-900 shadow-sm outline-none transition focus:border-black focus:ring-2 focus:ring-slate-200"
+                    className="mt-3 w-full rounded-2xl border border-slate-300 bg-white px-6 py-4 text-lg text-slate-900 shadow-sm outline-none transition focus:border-black focus:ring-2 focus:ring-slate-200"
                   />
                 </div>
               </div>
@@ -231,7 +231,7 @@ export default function Home() {
               <button
                 onClick={handleGenerate}
                 disabled={loading || !product || !company}
-                className="mt-6 mx-auto flex h-16 w-full max-w-[420px] items-center justify-center rounded-2xl bg-red-600 px-6 text-xl font-semibold text-white shadow-xl shadow-red-600/20 transition hover:bg-red-700 focus:outline-none focus:ring-4 focus:ring-red-200 disabled:cursor-not-allowed disabled:bg-slate-300 disabled:text-slate-500"
+                className="mx-auto mt-6 flex h-16 w-full max-w-[420px] items-center justify-center rounded-2xl bg-red-600 px-6 text-xl font-semibold text-white shadow-xl shadow-red-600/20 transition hover:bg-red-700 focus:outline-none focus:ring-4 focus:ring-red-200 disabled:cursor-not-allowed disabled:bg-red-400 disabled:text-white"
               >
                 {loading ? 'Generating questions...' : 'Generate Questions'}
               </button>
@@ -240,14 +240,14 @@ export default function Home() {
         </div>
 
         {questions.length > 0 && (
-          <section className="mt-[50px] rounded-[28px] border-2 border-red-400 bg-red-50 px-6 py-7 shadow-inner shadow-red-100/50">
+          <section className="mt-[50px] rounded-[28px] border-2 border-red-400 bg-red-50 px-6 py-8 shadow-inner shadow-red-100/50">
             <div className="mb-6 text-center">
               <h2 className="text-2xl font-semibold text-slate-950">Generated Questions for {company}</h2>
-              <p className="mx-auto mt-3 max-w-xl text-base leading-7 text-slate-700">Use these prompts for stronger discovery conversations.</p>
+              <p className="mx-auto mt-3 max-w-xl text-base leading-8 text-slate-700">Use these prompts for stronger discovery conversations.</p>
             </div>
             <ol className="space-y-4 pl-5 text-slate-800">
               {questions.map((q, i) => (
-                <li key={i} className="rounded-2xl border border-red-200 bg-white px-5 py-4 text-lg leading-8">
+                <li key={i} className="rounded-2xl border border-red-200 bg-red-50 px-5 py-4 text-lg leading-8">
                   {q}
                 </li>
               ))}
